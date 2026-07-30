@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Yaseen Memon — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy: #0A0D0F;
+    --slate: #12171A;
+    --paper: #0A0D0F;
+    --paper-2: #0F1417;
+    --ink: #E7ECEE;
+    --ink-soft: #8B959B;
+    --gold: #39FF8A;
+    --gold-dim: #1F8F52;
+    --line: #212A2E;
+    --radius: 4px;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Manrope', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .display{
+    font-family: 'Sora', sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  .mono{
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  a{ color: inherit; }
+
+  img, svg{ display:block; max-width:100%; }
+
+  :focus-visible{
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+
+  .wrap{
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- NAV ---------- */
+  header.site{
+    position: sticky;
+    top:0;
+    z-index: 50;
+    background: rgba(10,13,15,0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .navbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 16px 28px;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  .navbar .mark{
+    font-weight:700;
+    font-size: 1.05rem;
+  }
+
+  .navbar .mark span{ color: var(--gold); }
+
+  .navlinks{
+    display:flex;
+    gap: 28px;
+    list-style:none;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .navlinks a{
+    text-decoration:none;
+    color: var(--ink-soft);
+    padding-bottom: 4px;
+    position: relative;
+  }
+
+  .navlinks a::after{
+    content:'';
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform .3s ease;
+  }
+
+  .navlinks a:hover::after, .navlinks a.active::after{
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .navlinks a:hover, .navlinks a.active{ color: var(--ink); }
+
+  @media (max-width: 640px){
+    .navlinks{ display:none; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background: var(--navy);
+    color: #EDEFF3;
+    padding: 88px 0 0 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero .wrap{
+    display:grid;
+    grid-template-columns: 1fr 240px;
+    gap: 48px;
+    align-items: end;
+    padding-bottom: 56px;
+  }
+
+  .eyebrow{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+
+  .hero h1{
+    font-size: clamp(2.1rem, 5vw, 3.6rem);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    margin-bottom: 18px;
+    background: linear-gradient(100deg, #EDEFF3 30%, var(--gold) 50%, #EDEFF3 70%);
+    background-size: 220% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 6s linear infinite;
+  }
+
+  @keyframes shine{
+    0%{ background-position: 0% center; }
+    100%{ background-position: -220% center; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .hero h1{ animation: none; -webkit-text-fill-color: #EDEFF3; }
+  }
+
+  .hero .roles{
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    color: #B9C2CF;
+    max-width: 560px;
+    font-weight: 400;
+  }
+
+  .hero .roles strong{ color: #EDEFF3; font-weight: 600; }
+
+  .typed-line{
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: var(--gold);
+    margin-bottom: 14px;
+    min-height: 1.6em;
+  }
+
+  .cursor{
+    display:inline-block;
+    margin-left: 2px;
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink{
+    0%, 100%{ opacity: 1; }
+    50%{ opacity: 0; }
+  }
+
+  /* Scroll reveal */
+  .reveal{
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+
+  .reveal.visible{
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-stagger > *{
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+
+  .reveal-stagger.visible > *{
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-stagger.visible > *:nth-child(1){ transition-delay: .05s; }
+  .reveal-stagger.visible > *:nth-child(2){ transition-delay: .12s; }
+  .reveal-stagger.visible > *:nth-child(3){ transition-delay: .19s; }
+  .reveal-stagger.visible > *:nth-child(4){ transition-delay: .26s; }
+  .reveal-stagger.visible > *:nth-child(5){ transition-delay: .33s; }
+  .reveal-stagger.visible > *:nth-child(6){ transition-delay: .40s; }
+  .reveal-stagger.visible > *:nth-child(7){ transition-delay: .47s; }
+
+  .cert-card, .work-card{
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+
+  .cert-card:hover, .work-card:hover{
+    transform: translateY(-4px);
+    border-color: var(--gold-dim);
+    box-shadow: 0 14px 28px -14px rgba(57,255,138,0.28);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal, .reveal-stagger > *{
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+    .cursor{ animation: none; }
+    .cert-card:hover, .work-card:hover{ transform: none; }
+  }
+
+  .avatar-box{
+    width: 200px;
+    height: 240px;
+    border: 1px solid rgba(57,255,138,0.25);
+    border-radius: var(--radius);
+    overflow: hidden;
+    justify-self: end;
+    background: linear-gradient(160deg, #141A1D, #060809);
+    position: relative;
+    transition: border-color .3s ease, box-shadow .3s ease;
+  }
+
+  .avatar-box:hover{
+    border-color: var(--gold);
+    box-shadow: 0 0 32px -8px rgba(57,255,138,0.35);
+  }
+
+  .avatar-box img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+  }
+
+  .avatar-box::after{
+    content:'';
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 -40px 40px -20px rgba(5,7,8,0.6);
+    pointer-events: none;
+  }
+
+  @media (max-width: 640px){
+    .hero .wrap{ grid-template-columns: 1fr; }
+    .avatar-box{ justify-self:start; width:120px; height:144px; }
+  }
+
+  /* ---------- STATUS BOARD (signature element) ---------- */
+  .board{
+    background: #060809;
+    border-top: 1px solid rgba(57,255,138,0.12);
+  }
+
+  .board .wrap{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 0;
+  }
+
+  .board-cell{
+    padding: 20px 24px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .board-cell:last-child{ border-right: none; }
+
+  .board-cell .val{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.02em;
+  }
+
+  .board-cell .lbl{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #7C8AA0;
+    margin-top: 6px;
+  }
+
+  @media (max-width: 640px){
+    .board .wrap{ grid-template-columns: repeat(2, 1fr); }
+    .board-cell{ border-bottom: 1px solid rgba(255,255,255,0.08); }
+  }
+
+  /* ---------- SECTIONS ---------- */
+  section{ padding: 84px 0; }
+
+  .section-head{
+    display:flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+
+  .section-head .idx{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--gold);
+  }
+
+  .section-head h2{
+    font-size: 1.7rem;
+    font-weight: 600;
+  }
+
+  .section-head .rule{
+    flex:1;
+    height:1px;
+    background: var(--line);
+  }
+
+  /* About */
+  .about-grid{
+    display:grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 56px;
+  }
+
+  .about-grid p{
+    color: var(--ink-soft);
+    font-size: 1.02rem;
+    margin-bottom: 16px;
+  }
+
+  .about-grid p strong{ color: var(--ink); font-weight: 600; }
+
+  .focus-list{
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+
+  .focus-list li{
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    display:flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+  }
+
+  .focus-list li span:first-child{ color: var(--ink-soft); }
+  .focus-list li span:last-child{ font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; }
+
+  @media (max-width: 780px){
+    .about-grid{ grid-template-columns: 1fr; }
+  }
+
+  /* Experience */
+  .timeline{
+    border-left: 2px solid var(--line);
+    margin-left: 6px;
+  }
+
+  .tl-item{
+    position: relative;
+    padding: 4px 0 40px 32px;
+  }
+
+  .tl-item:last-child{ padding-bottom: 4px; }
+
+  .tl-item::before{
+    content:'';
+    position:absolute;
+    left: -7px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    background: var(--paper);
+    border: 2px solid var(--gold);
+    border-radius: 2px;
+  }
+
+  .tl-item .role-row{
+    display:flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+
+  .tl-item h3{ font-size: 1.15rem; font-weight: 600; }
+
+  .tl-item .period{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.76rem;
+    color: var(--ink-soft);
+  }
+
+  .tl-item .org{
+    color: var(--gold);
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+
+  .tl-item ul{
+    color: var(--ink-soft);
+    padding-left: 18px;
+    font-size: 0.94rem;
+  }
+
+  .tl-item li{ margin-bottom: 4px; }
+
+  /* Skills */
+  .skills-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .skill-col{
+    background: var(--paper);
+    padding: 28px;
+  }
+
+  .skill-col h3{
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display:flex;
+    align-items:center;
+    gap: 8px;
+  }
+
+  .skill-col h3::before{
+    content:'';
+    width: 8px; height: 8px;
+    background: var(--gold);
+    display:inline-block;
+  }
+
+  .tag-row{ display:flex; flex-wrap:wrap; gap: 8px; }
+
+  .tag{
+    font-size: 0.78rem;
+    padding: 5px 10px;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    border-radius: 2px;
+  }
+
+  @media (max-width: 780px){
+    .skills-grid{ grid-template-columns: 1fr; }
+  }
+
+  /* Certifications */
+  .cert-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px;
+  }
+
+  .cert-card{
+    border: 1px solid var(--line);
+    background: var(--slate);
+    padding: 22px;
+    border-radius: var(--radius);
+  }
+
+  .cert-card .cert-icon{
+    width: 34px; height: 34px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    margin-bottom: 14px;
+  }
+
+  .cert-card h3{ font-size: 0.98rem; font-weight: 600; margin-bottom: 4px; }
+  .cert-card .issuer{ font-size: 0.82rem; color: var(--ink-soft); margin-bottom: 4px; }
+  .cert-card .date{ font-family:'JetBrains Mono', monospace; font-size: 0.72rem; color: #9AA6B4; margin-bottom: 12px; }
+  .cert-card .verify{ font-size: 0.76rem; text-decoration:none; color: var(--gold); border-bottom: 1px solid transparent; }
+  .cert-card .verify:hover{ border-color: var(--gold); }
+
+  @media (max-width: 780px){
+    .cert-grid{ grid-template-columns: repeat(2,1fr); }
+  }
+  @media (max-width: 520px){
+    .cert-grid{ grid-template-columns: 1fr; }
+  }
+
+  /* Work / Portfolio */
+  .work-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .work-card{
+    border: 1px solid var(--line);
+    background: var(--slate);
+    overflow: hidden;
+    border-radius: var(--radius);
+  }
+
+  .work-thumb{
+    aspect-ratio: 4/3;
+    background:
+      repeating-linear-gradient(45deg, var(--paper-2), var(--paper-2) 10px, #0A0D0F 10px, #0A0D0F 20px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color: var(--ink-soft);
+    font-family:'JetBrains Mono', monospace;
+    font-size: 0.74rem;
+    text-align:center;
+    padding: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .work-body{ padding: 16px; }
+  .work-body h3{ font-size: 0.92rem; font-weight: 600; margin-bottom: 4px; }
+  .work-body p{ font-size: 0.8rem; color: var(--ink-soft); }
+  .work-body .tag{ display:inline-block; margin-top:10px; }
+
+  @media (max-width: 780px){
+    .work-grid{ grid-template-columns: repeat(2,1fr); }
+  }
+  @media (max-width: 520px){
+    .work-grid{ grid-template-columns: 1fr; }
+  }
+
+  /* Contact */
+  .contact{
+    background: var(--navy);
+    color: #EDEFF3;
+  }
+
+  .contact .wrap{
+    display:grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 48px;
+  }
+
+  .contact h2{ font-size: 1.9rem; margin-bottom: 14px; }
+  .contact p{ color: #B9C2CF; margin-bottom: 24px; max-width: 440px; }
+
+  .contact-list{ list-style:none; }
+  .contact-list li{
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    display:flex;
+    justify-content: space-between;
+    font-size: 0.92rem;
+  }
+  .contact-list li span:first-child{ color: #7C8AA0; font-family:'JetBrains Mono', monospace; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.08em; }
+  .contact-list li a{ text-decoration:none; }
+  .contact-list li a:hover{ color: var(--gold); }
+
+  .btn{
+    display:inline-block;
+    margin-top: 8px;
+    padding: 12px 24px;
+    background: var(--gold);
+    color: var(--navy);
+    font-weight: 600;
+    font-size: 0.88rem;
+    text-decoration:none;
+    border-radius: var(--radius);
+    transition: transform .15s ease;
+  }
+  .btn:hover{ transform: translateY(-2px); }
+
+  @media (max-width: 780px){
+    .contact .wrap{ grid-template-columns: 1fr; }
+  }
+
+  footer{
+    background: #0B1420;
+    color: #7C8AA0;
+    text-align:center;
+    padding: 24px;
+    font-size: 0.78rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    .btn{ transition: none; }
+  }
+
+  /* ---------- Extra motion layer ---------- */
+  .progress-bar{
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--gold-dim), var(--gold));
+    box-shadow: 0 0 12px 0 rgba(57,255,138,0.6);
+    z-index: 100;
+    transition: width .1s ease-out;
+  }
+
+  .glow-blob{
+    position: absolute;
+    width: 480px;
+    height: 480px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(57,255,138,0.16), transparent 70%);
+    filter: blur(10px);
+    pointer-events: none;
+    animation: drift 14s ease-in-out infinite;
+  }
+
+  .glow-blob.b1{ top: -160px; left: -120px; animation-delay: 0s; }
+  .glow-blob.b2{ bottom: -220px; right: -140px; width: 380px; height: 380px;
+    background: radial-gradient(circle, rgba(0,217,255,0.10), transparent 70%);
+    animation-delay: -6s; }
+
+  @keyframes drift{
+    0%, 100%{ transform: translate(0,0) scale(1); }
+    50%{ transform: translate(30px,-24px) scale(1.08); }
+  }
+
+  .navlinks a.active{ color: var(--gold); }
+
+  .tag{ transition: border-color .2s ease, color .2s ease, transform .2s ease; }
+  .tag:hover{ border-color: var(--gold); color: var(--ink); transform: translateY(-2px); }
+
+  .btn{ position: relative; }
+  .btn::after{
+    content:'';
+    position:absolute; inset:0;
+    border-radius: var(--radius);
+    box-shadow: 0 0 0 0 rgba(57,255,138,0.5);
+    animation: pulse 2.4s ease-out infinite;
+  }
+
+  @keyframes pulse{
+    0%{ box-shadow: 0 0 0 0 rgba(57,255,138,0.45); }
+    70%{ box-shadow: 0 0 0 14px rgba(57,255,138,0); }
+    100%{ box-shadow: 0 0 0 0 rgba(57,255,138,0); }
+  }
+
+  .avatar-box, .cert-icon{ animation: none; }
+
+  /* Marquee ticker */
+  .ticker-wrap{
+    background: var(--slate);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 14px 0;
+  }
+
+  .ticker-track{
+    display:inline-flex;
+    animation: ticker 26s linear infinite;
+  }
+
+  .ticker-track span{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    padding: 0 22px;
+    display:inline-flex;
+    align-items:center;
+    gap: 10px;
+  }
+
+  .ticker-track span::before{
+    content: '◆';
+    color: var(--gold);
+    font-size: 0.6rem;
+  }
+
+  @keyframes ticker{
+    0%{ transform: translateX(0); }
+    100%{ transform: translateX(-50%); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .ticker-track{ animation: none; }
+  }
+
+  /* Card tilt on hover */
+  .cert-card, .work-card{
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .glow-blob{ animation: none; }
+    .btn::after{ animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress-bar"></div>
+
+<header class="site">
+  <nav class="navbar">
+    <div class="mark">YASEEN<span>.</span>MEMON</div>
+    <ul class="navlinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="glow-blob b1"></div>
+  <div class="glow-blob b2"></div>
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Operations · Design · Analytics</div>
+      <h1>Muhammad<br>Yaseen Memon</h1>
+      <p class="typed-line mono">
+        <span id="typed-text"></span><span class="cursor" aria-hidden="true">|</span>
+      </p>
+      <p class="roles">
+        <strong>Supervisor, Call Center</strong> at Airblue Airline —
+        also freelancing as a <strong>Creative Designer &amp; Video Editor</strong> for BizExcel and OlMedi,
+        with 6+ years tracking call conversions on CallRail.
+      </p>
+    </div>
+    <div class="avatar-box">
+      <img src="assets/yaseen-memon.jpg" alt="Muhammad Yaseen Memon">
+    </div>
+  </div>
+
+  <div class="board">
+    <div class="wrap">
+      <div class="board-cell">
+        <div class="val counter" data-target="2">00</div>
+        <div class="lbl">Years — Airblue Ops</div>
+      </div>
+      <div class="board-cell">
+        <div class="val counter" data-target="6">00</div>
+        <div class="lbl">Years — Call Tracking</div>
+      </div>
+      <div class="board-cell">
+        <div class="val counter" data-target="7">00</div>
+        <div class="lbl">Certifications</div>
+      </div>
+      <div class="board-cell">
+        <div class="val">--</div>
+        <div class="lbl">Projects delivered — add count</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-track">
+    <span>Customer Operations</span><span>Team Leadership</span><span>Graphic Design</span><span>Video Editing</span><span>Adobe Photoshop</span><span>Premiere Pro</span><span>CallRail Tracking</span><span>QC Reporting</span><span>Google &amp; Meta Ads</span><span>Branding</span>
+    <span>Customer Operations</span><span>Team Leadership</span><span>Graphic Design</span><span>Video Editing</span><span>Adobe Photoshop</span><span>Premiere Pro</span><span>CallRail Tracking</span><span>QC Reporting</span><span>Google &amp; Meta Ads</span><span>Branding</span>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="idx">01</span>
+      <h2>About</h2>
+      <span class="rule"></span>
+    </div>
+    <div class="about-grid reveal">
+      <div>
+        <p>
+          I'm <strong>Muhammad Yaseen Memon</strong>, currently a <strong>Supervisor, Call Center</strong>
+          at Airblue Airline, where I've spent the past two years leading day-to-day call center operations.
+        </p>
+        <p>
+          Alongside that, I work freelance with <strong>BizExcel</strong> (a Google Premier Digital Marketing &amp; PPC agency)
+          and <strong>OlMedi</strong>, a healthcare digital marketing agency in the UAE — handling
+          <strong>call conversion tracking on CallRail</strong>, quality control reporting, and creative design
+          for clinics and healthcare practitioners.
+        </p>
+        <p>
+          My background spans airline customer service, hospital social media and creative direction, and digital
+          marketing QC — which means I bring both an operational, process-driven mindset and a creative eye to
+          whatever I take on. I'm open to full-time roles in customer operations as well as freelance design and
+          video work.
+        </p>
+      </div>
+      <ul class="focus-list">
+        <li><span>Based in</span><span>Islamabad, Pakistan</span></li>
+        <li><span>Current role</span><span>Supervisor, Call Center — Airblue</span></li>
+        <li><span>Also active in</span><span>Design / Video — BizExcel, OlMedi</span></li>
+        <li><span>Tracking tool</span><span>CallRail</span></li>
+        <li><span>Open to</span><span>Full-time &amp; freelance opportunities</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="experience" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="idx">02</span>
+      <h2>Experience</h2>
+      <span class="rule"></span>
+    </div>
+    <div class="timeline reveal-stagger">
+      <div class="tl-item">
+        <div class="role-row">
+          <h3>Supervisor — Call Center</h3>
+          <span class="period">Sep 2024 — Present</span>
+        </div>
+        <div class="org">Airblue Airline</div>
+        <ul>
+          <li>Supervise and manage a team of call center agents, ensuring high-quality customer service and operational efficiency.</li>
+          <li>Monitor daily performance, provide guidance, and conduct training to improve team productivity and service standards.</li>
+          <li>Handle passenger complaints and escalations, ensuring timely resolution and customer satisfaction.</li>
+          <li>Oversee re-accommodation for passengers affected by schedule changes, cancellations, or disruptions.</li>
+          <li>Coordinate with 12 national and international stations on ticketing corrections and passenger data updates.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="role-row">
+          <h3>Social Media Coordinator &amp; Creative Designer</h3>
+          <span class="period">May 2022 — Mar 2024</span>
+        </div>
+        <div class="org">IRM Hospital &amp; College — Institute of Regenerative Medicine</div>
+        <ul>
+          <li>Managed official social media accounts for the hospital and college, ensuring consistent online presence.</li>
+          <li>Shot and edited professional photos and videos for digital campaigns and promotional activities.</li>
+          <li>Designed social media posts, graphics, and marketing collateral including prospectus and brochures.</li>
+          <li>Contributed to website content development for the college.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="role-row">
+          <h3>Customer Services Executive</h3>
+          <span class="period">Apr 2021 — Jan 2022</span>
+        </div>
+        <div class="org">Pakistan International Airline (PIA)</div>
+        <ul>
+          <li>Assisted passengers with reservations, check-in, ticketing, and flight information.</li>
+          <li>Resolved customer complaints with professionalism, maintaining high satisfaction levels.</li>
+          <li>Coordinated with operational teams to support timely departures and efficient service delivery.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="role-row">
+          <h3>Creative Designer &amp; Social Media Content Specialist</h3>
+          <span class="period">Apr 2020 — Present · Freelance</span>
+        </div>
+        <div class="org">OlMedi — Healthcare Digital Marketing Agency (UAE)</div>
+        <ul>
+          <li>Designed social media posts, banners, and ad creatives for healthcare and medical practitioners.</li>
+          <li>Edited videos and promotional content to improve client engagement and brand visibility.</li>
+          <li>Created logos, icons, and website graphics aligned with brand identity guidelines.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="role-row">
+          <h3>Quality Control &amp; Digital Marketing Executive</h3>
+          <span class="period">Oct 2019 — Present · Freelance</span>
+        </div>
+        <div class="org">BizExcel — Google Premier Digital Marketing &amp; PPC Agency</div>
+        <ul>
+          <li>Analyzed CallRail recorded calls to identify leads and conversion opportunities for client reporting.</li>
+          <li>Prepared detailed QC reports highlighting call quality and conversion metrics.</li>
+          <li>Assisted in planning and monitoring Google &amp; Meta Ads campaigns to improve ROI.</li>
+          <li>Managed social media scheduling via Buffer, maintaining consistent brand presence.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="idx">03</span>
+      <h2>Skills</h2>
+      <span class="rule"></span>
+    </div>
+    <div class="skills-grid reveal-stagger">
+      <div class="skill-col">
+        <h3>Operations &amp; Support</h3>
+        <div class="tag-row">
+          <span class="tag">Team Leadership</span>
+          <span class="tag">Customer Support</span>
+          <span class="tag">Escalation Handling</span>
+          <span class="tag">Problem Solving</span>
+          <span class="tag">MS Office Suite</span>
+        </div>
+      </div>
+      <div class="skill-col">
+        <h3>Design &amp; Video</h3>
+        <div class="tag-row">
+          <span class="tag">Adobe Photoshop</span>
+          <span class="tag">Illustrator</span>
+          <span class="tag">Canva</span>
+          <span class="tag">Premiere Pro</span>
+          <span class="tag">CapCut</span>
+          <span class="tag">Branding &amp; Logo Design</span>
+        </div>
+      </div>
+      <div class="skill-col">
+        <h3>Analytics &amp; Marketing</h3>
+        <div class="tag-row">
+          <span class="tag">CallRail</span>
+          <span class="tag">QC Reporting</span>
+          <span class="tag">Google &amp; Meta Ads</span>
+          <span class="tag">Buffer</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="idx">04</span>
+      <h2>Education</h2>
+      <span class="rule"></span>
+    </div>
+    <ul class="focus-list reveal-stagger">
+      <li><span>Intermediate — Computer Science · 2019</span><span>Government Degree College, Kingri</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="certifications" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="idx">05</span>
+      <h2>Certifications</h2>
+      <span class="rule"></span>
+    </div>
+    <!-- Add more .cert-card blocks below as you earn new certifications -->
+    <div class="cert-grid reveal-stagger">
+      <div class="cert-card">
+        <div class="cert-icon">01</div>
+        <h3>Programming for Everybody (Getting Started with Python)</h3>
+        <div class="issuer">University of Michigan — Coursera</div>
+        <div class="date">Issued Nov 26, 2025</div>
+        <a class="verify" href="https://coursera.org/verify/ZS1507LD4RGC" target="_blank" rel="noopener">Verify credential →</a>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">02</div>
+        <h3>Introduction to Cybersecurity Careers</h3>
+        <div class="issuer">IBM — Coursera</div>
+        <div class="date">Issued Dec 13, 2025</div>
+        <a class="verify" href="https://coursera.org/verify/UV3902EWLC1R" target="_blank" rel="noopener">Verify credential →</a>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">03</div>
+        <h3>Cybersecurity Policy for Aviation and Internet Infrastructures</h3>
+        <div class="issuer">University of Colorado System — Coursera</div>
+        <div class="date">Issued Dec 15, 2025</div>
+        <a class="verify" href="https://coursera.org/verify/TTS9BYUXQ7XJ" target="_blank" rel="noopener">Verify credential →</a>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">04</div>
+        <h3>Security &amp; Safety Challenges in a Globalized World</h3>
+        <div class="issuer">Universiteit Leiden — Coursera</div>
+        <div class="date">Issued Dec 17, 2025</div>
+        <a class="verify" href="https://coursera.org/verify/H2UXRTQRXCO5" target="_blank" rel="noopener">Verify credential →</a>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">05</div>
+        <h3>Graphic Designing</h3>
+        <div class="issuer">DigiSkills.pk — Government of Pakistan</div>
+        <div class="date">2023</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">06</div>
+        <h3>English Language Training (ELT)</h3>
+        <div class="issuer">Institute of Business Administration (IBA), Sukkur</div>
+        <div class="date">2018</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon">07</div>
+        <h3>UK Risk and Harm from Transit Visa Training</h3>
+        <div class="issuer">UK Home Office &amp; British High Commission, Islamabad — via Airblue</div>
+        <div class="date">2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="idx">06</span>
+      <h2>Selected Work</h2>
+      <span class="rule"></span>
+      <a class="verify" href="https://creative-design-portfoli-2y1nr9p.gamma.site/" target="_blank" rel="noopener" style="white-space:nowrap;">View full portfolio →</a>
+    </div>
+    <!-- Duplicate .work-card blocks for each real project. Replace .work-thumb with <img src="..."> -->
+    <div class="work-grid reveal-stagger">
+      <div class="work-card">
+        <div class="work-thumb">Replace with<br>video thumbnail</div>
+        <div class="work-body">
+          <h3>[Project title]</h3>
+          <p>[Short description of the video or campaign]</p>
+          <span class="tag">Video Edit</span>
+        </div>
+      </div>
+      <div class="work-card">
+        <div class="work-thumb">Replace with<br>design sample</div>
+        <div class="work-body">
+          <h3>[Project title]</h3>
+          <p>[Short description of the design work]</p>
+          <span class="tag">Graphic Design</span>
+        </div>
+      </div>
+      <div class="work-card">
+        <div class="work-thumb">Replace with<br>report screenshot</div>
+        <div class="work-body">
+          <h3>[Project title]</h3>
+          <p>[Short description of a call-tracking or reporting project]</p>
+          <span class="tag">Analytics</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div>
+      <h2>Let's work together</h2>
+      <p>Open to conversations about operations leadership, design and video projects, or call tracking and analytics work.</p>
+      <a class="btn" href="mailto:memeonyaseenm@gmail.com">Send an email</a>
+    </div>
+    <ul class="contact-list">
+      <li><span>Email</span><a href="mailto:memeonyaseenm@gmail.com">memeonyaseenm@gmail.com</a></li>
+      <li><span>Phone</span><a href="tel:+923475522232">+92 347 5522232</a></li>
+      <li><span>LinkedIn</span><a href="https://www.linkedin.com/in/memonyaseenm/" target="_blank" rel="noopener">linkedin.com/in/memonyaseenm</a></li>
+      <li><span>Full Portfolio</span><a href="https://creative-design-portfoli-2y1nr9p.gamma.site/" target="_blank" rel="noopener">View on Gamma</a></li>
+      <li><span>Location</span><span>G-9/1, Islamabad</span></li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  © 2026 Muhammad Yaseen Memon — Built as a static site, free to host on GitHub Pages or Netlify.
+</footer>
+<script>
+(function(){
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Typing animation for hero role titles
+  var roles = [
+    'Supervisor, Call Center — Airblue',
+    'Creative Designer & Video Editor',
+    'Call Tracking & QC Analyst'
+  ];
+  var typedEl = document.getElementById('typed-text');
+
+  function typeLoop(){
+    var roleIndex = 0, charIndex = 0, deleting = false;
+
+    function tick(){
+      var current = roles[roleIndex];
+      if (!deleting){
+        charIndex++;
+        typedEl.textContent = current.slice(0, charIndex);
+        if (charIndex === current.length){
+          deleting = true;
+          setTimeout(tick, 1600);
+          return;
+        }
+      } else {
+        charIndex--;
+        typedEl.textContent = current.slice(0, charIndex);
+        if (charIndex === 0){
+          deleting = false;
+          roleIndex = (roleIndex + 1) % roles.length;
+        }
+      }
+      setTimeout(tick, deleting ? 35 : 55);
+    }
+    tick();
+  }
+
+  if (typedEl){
+    if (reduceMotion){
+      typedEl.textContent = roles[0];
+    } else {
+      typeLoop();
+    }
+  }
+
+  // Scroll reveal
+  var revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+  if (reduceMotion || !('IntersectionObserver' in window)){
+    revealEls.forEach(function(el){ el.classList.add('visible'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(function(el){ io.observe(el); });
+  }
+
+  // Count-up stats
+  var counters = document.querySelectorAll('.counter');
+  function animateCounter(el){
+    var target = parseInt(el.getAttribute('data-target'), 10) || 0;
+    if (reduceMotion){
+      el.textContent = String(target).padStart(2, '0');
+      return;
+    }
+    var start = 0, duration = 900, startTime = null;
+    function step(ts){
+      if (!startTime) startTime = ts;
+      var progress = Math.min((ts - startTime) / duration, 1);
+      var value = Math.round(progress * target);
+      el.textContent = String(value).padStart(2, '0');
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  if (!('IntersectionObserver' in window)){
+    counters.forEach(animateCounter);
+  } else {
+    var counterIO = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          animateCounter(entry.target);
+          counterIO.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.6 });
+    counters.forEach(function(el){ counterIO.observe(el); });
+  }
+
+  // Scroll progress bar
+  var progressBar = document.getElementById('progress-bar');
+  function updateProgress(){
+    var scrollTop = window.scrollY || document.documentElement.scrollTop;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    if (progressBar) progressBar.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+
+  // Nav scroll-spy
+  var navLinks = document.querySelectorAll('.navlinks a');
+  var sections = Array.prototype.map.call(navLinks, function(link){
+    var id = link.getAttribute('href').slice(1);
+    return document.getElementById(id);
+  }).filter(Boolean);
+
+  if ('IntersectionObserver' in window && sections.length){
+    var spyIO = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var link = document.querySelector('.navlinks a[href="#' + entry.target.id + '"]');
+        if (!link) return;
+        if (entry.isIntersecting){
+          navLinks.forEach(function(l){ l.classList.remove('active'); });
+          link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+    sections.forEach(function(sec){ spyIO.observe(sec); });
+  }
+
+  // Card tilt-on-hover
+  if (!reduceMotion && window.matchMedia('(hover: hover)').matches){
+    var tiltCards = document.querySelectorAll('.cert-card, .work-card');
+    tiltCards.forEach(function(card){
+      card.addEventListener('mousemove', function(e){
+        var rect = card.getBoundingClientRect();
+        var x = (e.clientX - rect.left) / rect.width - 0.5;
+        var y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = 'perspective(600px) rotateX(' + (y * -6) + 'deg) rotateY(' + (x * 6) + 'deg) translateY(-4px)';
+      });
+      card.addEventListener('mouseleave', function(){
+        card.style.transform = '';
+      });
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
